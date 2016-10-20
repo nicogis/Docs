@@ -337,6 +337,20 @@ Each log message includes the scoped information:
         => RequestId:0HKV9C49II9CK RequestPath:/api/todo/0 => TodoApi.Controllers.TodoController.GetById (TodoApi) => Message attached to logs created in the using block
         GetById(0) NOT FOUND 
 
+Specifying provider options in configuration
+--------------------------------------------
+
+The console provider lets you specify filtering criteria and scopes support in configuration rather than in code. When you create a new project in Visual Studio, the ``AddConsole`` method looks like this:
+
+.. code-block:: c#
+
+  loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+
+This code refers to the ``Logging`` section of the *appSettings.json* file:
+
+.. literalinclude:: logging/sample/src/TodoApi/appsettings.json
+  :language: javascript
+
 TraceSource Logging
 -------------------
 
