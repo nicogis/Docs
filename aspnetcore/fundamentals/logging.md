@@ -298,6 +298,8 @@ This code refers to the `Logging` section of the *appSettings.json* file:
 
 [!code-json[](logging/sample/src/TodoApi/appsettings.json)]
 
+These settings limit framework logs to warnings while allowing the app to log at debug level, as explained in the [Log filtering](#log-filtering) section. For more information, see [Configuration](configuration.md).
+
 ### The Debug provider
 
 The [Microsoft.Extensions.Logging.Debug](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Debug) NuGet package writes log output by using the [Debug](https://docs.microsoft.com/dotnet/core/api/system.diagnostics.debug#System_Diagnostics_Debug) class.
