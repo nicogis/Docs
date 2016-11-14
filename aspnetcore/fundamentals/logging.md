@@ -328,7 +328,16 @@ TodoApi.Controllers.TodoController Warning: 4000 : GetById(0) NOT FOUND
 
 ### The Azure App Service provider
 
-The [Microsoft.Extensions.Logging.AzureAppServices](https://www.nuget.org/packages/Microsoft.Extensions.Logging.AzureAppServices) NuGet package works when you deploy your app to Azure App Service. It sends log output to the Azure App Service file system or Azure blob storage.
+Azure App Service has built-in support for writing logs to text files in an App Service app's file system and to text [blobs](https://azure.microsoft.com/en-us/documentation/articles/storage-dotnet-how-to-use-blobs/#what-is-blob-storage) in an Azure Storage account. The [Microsoft.Extensions.Logging.AzureAppServices](https://www.nuget.org/packages/Microsoft.Extensions.Logging.AzureAppServices) NuGet package is a logging provider that sends logs to either or both destinations. 
+
+To use the provider, install the provider package and call `AddAzureWebAppDiagnostics` on an `ILoggerFactory` instance. Then deploy your project to an App Service app, and configure the app for file or blob logging. An App Service app has separate on/off switches for file logging and for blob logging, and for blobs you have to specify the storage account and container name. For more information, see [How to enable diagnostic logs](https://azure.microsoft.com/en-us/documentation/articles/web-sites-enable-diagnostic-log/#enablediag). 
+
+> [!NOTE]
+> The provider only works when your project runs in the Azure environment.  It has no effect when you run locally -- it does not write to local files or local development storage for blobs.
+
+After you enable file logging and run your app in Azure to generate logs, you'll find your logs in the *Log files/Application* folder, in a file named *diagnostics-yyyymmdd.txt*. 
+
+If you enable blob logging, you'll find your logs in the container you specified, in *AzureLogging{timestamp}/yyyy/mm/dd/hh/{guid}-applicationLog.txt*.
 
 ## Third-party logging providers
 
